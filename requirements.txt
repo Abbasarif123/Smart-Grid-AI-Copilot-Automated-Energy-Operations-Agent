@@ -1,0 +1,16 @@
+# Data & ML
+pandas>=2.0.0
+numpy
+requests
+pyarrow
+scikit-learn
+xgboost
+
+# Agent & LLM
+langgraph
+langchain-core
+langchain-openai
+pydantic>=2.0.0
+
+# Testing & Tools
+pytest
