@@ -83,4 +83,3 @@ pytest -v
 ```
 
 ---
-*Developed for AI Automation and Agent-based engineering roles.*
