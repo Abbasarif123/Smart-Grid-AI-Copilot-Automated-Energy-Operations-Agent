@@ -73,6 +73,28 @@ streamlit run app/dashboard.py --server.port 8501
 
 Navigate to `http://localhost:8501` in your browser. Click **"Investigate Incident"** to watch the agent analyze the data, run the forecast, check regulations, and pause for your approval!
 
+---
+
+## Prompting Guidelines & Sample Prompts
+
+Because this agent uses a Human-in-the-Loop (HITL) architecture, it needs to know *when* to pause and ask for your approval. 
+
+**⚠️ Critical Rule:** You must include the exact phrase **`PROPOSE ACTION`** in your prompt. This acts as a trigger word for the LangGraph state machine to halt execution and present the draft plan to the Streamlit UI.
+
+### Sample Prompts to Try:
+Copy and paste these into the Streamlit dashboard:
+
+* **Full Pipeline Test (Data + Forecast + RAG):**
+  > "Prices dropped to negative values in early March. Query the historical data from 2024-03-03 to 2024-03-05, run a 4-hour forecast, check the regulations for what we must do during negative price events, and PROPOSE ACTION."
+
+* **Forecast & Strategy Focus:**
+  > "What is the 12-hour ML forecast for grid prices? Based on the trend and our regulatory guidelines, PROPOSE ACTION to minimize financial loss."
+
+* **Data & Regulation Check:**
+  > "Query the spot prices for 2024-03-04. Are there any BNetzA guidelines about baseload plants during these price drops? PROPOSE ACTION."
+
+---
+
 ## Testing
 
 This project includes a Pytest suite to verify the deterministic components of the pipeline (feature engineering and tool logic).
