@@ -2,6 +2,11 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from langchain_core.messages import HumanMessage
 import uuid
+import dotenv
+
+#load env
+dotenv.load_dotenv()
+
 
 # import compiled LangGraph app (rename it to avoid clashing with FastAPI's app)
 from agent.graph import app as graph_app 
@@ -17,12 +22,12 @@ class ApprovalPayload(BaseModel):
 
 #API Endpoints
 
-@api.post("/api/investigate")
+@api.post("/api/investigate") #checks for incoming alert
 def start_investigation(payload: AlertPayload):
     """
     Endpoint 1: Receives an alert, starts the agent, and pauses for approval.
     """
-    # generate a unique thread ID for this specific incident
+    # generate a unique thread ID for this specific incident and save state under that ID
     thread_id = str(uuid.uuid4())
     config = {"configurable": {"thread_id": thread_id}}
     

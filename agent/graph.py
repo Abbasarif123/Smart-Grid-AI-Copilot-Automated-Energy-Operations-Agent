@@ -1,14 +1,16 @@
 from langgraph.graph import StateGraph, START, END
 from langgraph.prebuilt import ToolNode
-from langchain_openai import ChatOpenAI
 from langgraph.checkpoint.memory import InMemorySaver
+
+
+from langchain_groq import ChatGroq
 from agent.state import AgentState
-from agent.tools import query_historical_spot_prices
+from agent.tools import query_historical_spot_prices,run_price_forecast,search_regulations
 
 
 #initialise llm and bind tools to it
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
-tools = [query_historical_spot_prices]
+llm = ChatGroq(model="openai/gpt-oss-20b", temperature=0)
+tools = [query_historical_spot_prices,run_price_forecast,search_regulations]
 llm_with_tools = llm.bind_tools(tools)
 
 #define the nodes

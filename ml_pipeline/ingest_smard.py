@@ -8,6 +8,8 @@ from pathlib import Path
 #transform raw JSON to time series data
 #export into parquet file
 
+#resikve data directory issues
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
 def fetch_smard_data(filter_id: int, region_id: str, resolution: str, timestamp: int) -> pd.DataFrame:
     """
@@ -52,15 +54,15 @@ if __name__ == "__main__":
             resolution="hour", 
             timestamp=sample_timestamp
         )
-        
+        print("\nFetched sample records:")
         print(df_prices.head())
         
         # save to the data directory as Parquet (efficient storage)
-        output_dir = Path("../data")
-        output_dir.mkdir(exist_ok=True)
-        df_prices.to_parquet(output_dir / "spot_prices.parquet")
+        DATA_DIR.mkdir(parents=True, exist_ok=True)
+        output_file = DATA_DIR / "spot_prices.parquet"
         
-        print(f"Data saved successfully to {output_dir.resolve()}/spot_prices.parquet")
+        df_prices.to_parquet(output_file)
+        print(f"\nData saved successfully to {output_file}")
         
     except requests.exceptions.HTTPError as e:
         print(f"Failed to fetch data: {e}")

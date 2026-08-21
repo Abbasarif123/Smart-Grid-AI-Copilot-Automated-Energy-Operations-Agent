@@ -1,4 +1,4 @@
-# Data & ML
+# data and ml
 pandas>=2.0.0
 numpy
 requests
@@ -6,11 +6,21 @@ pyarrow
 scikit-learn
 xgboost
 
-# Agent & LLM
+# agent and llm
 langgraph
 langchain-core
-langchain-openai
-pydantic>=2.0.0
+langchain-groq
+langchain-chroma
+langchain-huggingface
+sentence-transformers
+chromadb
 
-# Testing & Tools
+#api and frontend
+fastapi
+uvicorn
+pydantic>=2.0.0
+streamlit
+
+# environment and testing
+python-dotenv
 pytest
