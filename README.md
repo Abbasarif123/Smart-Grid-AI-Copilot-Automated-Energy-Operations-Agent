@@ -1,4 +1,3 @@
-work in progress
 # Smart Grid AI Copilot & Automated Energy Operations Agent
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
@@ -38,3 +37,50 @@ Clone the repository and install the required dependencies:
 git clone [https://github.com/Abbasarif123/Smart-Grid-AI-Copilot-Automated-Energy-Operations-Agent.git](https://github.com/Abbasarif123/Smart-Grid-AI-Copilot-Automated-Energy-Operations-Agent.git)
 cd Smart-Grid-AI-Copilot-Automated-Energy-Operations-Agent
 pip install -r requirements.txt
+```
+
+### 2. Configure Environment Variables
+Create a `.env` file in the root directory and add your free Groq API key:
+```env
+GROQ_API_KEY="gsk_your_api_key_here"
+```
+
+### 3. Generate Data, ML, and RAG Artifacts
+Run the pipeline scripts to download the sample data, train the model, and build the local vector database:
+```bash
+# 1. Download SMARD.de data
+python ml_pipeline/ingest_smard.py
+
+# 2. Train the XGBoost forecasting model
+python ml_pipeline/train.py
+
+# 3. Build the ChromaDB regulatory knowledge base
+python ml_pipeline/ingest_regulations.py
+```
+
+### 4. Start the Application
+You need to run both the FastAPI backend and the Streamlit frontend. Open two separate terminals:
+
+**Terminal 1 (Backend):**
+```bash
+uvicorn app.api:api --reload --port 8000
+```
+
+**Terminal 2 (Frontend):**
+```bash
+streamlit run app/dashboard.py --server.port 8501
+```
+
+Navigate to `http://localhost:8501` in your browser. Click **"Investigate Incident"** to watch the agent analyze the data, run the forecast, check regulations, and pause for your approval!
+
+## Testing
+
+This project includes a Pytest suite to verify the deterministic components of the pipeline (feature engineering and tool logic).
+
+To run the tests:
+```bash
+pytest -v
+```
+
+---
+*Developed for AI Automation and Agent-based engineering roles.*
