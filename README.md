@@ -93,6 +93,9 @@ Copy and paste these into the Streamlit dashboard:
 * **Data & Regulation Check:**
   > "Query the spot prices for 2024-03-04. Are there any BNetzA guidelines about baseload plants during these price drops? PROPOSE ACTION."
 
+* **The "Baseload Cold-Start" Stress Test (All 3 Tools):**
+  > "We are seeing severe negative price anomalies. Please query the spot prices for 2024-03-04, run an 8-hour ML forecast to see if this trend continues, and check the regulations regarding nuclear and coal baseload operations during these events. Based on all three sources, PROPOSE ACTION."
+
 ---
 
 ## Testing
